@@ -20,11 +20,11 @@
 			<img id="icon" href="/" src = "{{ url_for('static' , filename='images/icon.png') }}" alt="" />
 		</div>
 		<!--Links-->
-		    <ul class="nav navbar-nav pull-right">
-		        <li class="nav-item">
-		            <a class="nav-link" href="#">About</a>
-		        </li>
-		    </ul>
+			<ul class="nav navbar-nav pull-right">
+				<li class="nav-item" data-toggle="modal" data-target="#aboutModal">
+					<a class="nav-link" href="#">About</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 	<!-- Main Content Goes Here -->
@@ -38,6 +38,18 @@
 				<button data-toggle="modal" data-target="#signupModal" class="btn btn-success">Signup</button>
 			</div>
 		<!-- </div> -->
+		<!-- About Modal -->
+		<div class="modal fade" id="aboutModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<h5 class="lead text-center text-muted">About</h5>
+						<p class="text-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor mauris a dignissim molestie. Aenean id ante commodo, consequat metus id, mattis nisl. Nulla quis tortor imperdiet, molestie nisl vel. </p>
+						<p class="text-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan odio vel dolor lacinia, sit amet mollis dui sodales. Duis gravida magna eget tristique efficitur. Aenean dignissim nisl vel enim interdum viverra. Duis metus lorem, facilisis quis ornare a, porttitor.</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- Login Modal -->
 		<div class="modal fade" id="loginModal" role="dialog">
 			<div class="modal-dialog" >
