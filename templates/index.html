@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="todoApp">
 <head>
 	<title>Todo - A Flask learn app</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,13 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Angular magic goes here -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
 </head>
-<body class="bg">
+<body class="bg" ng-controller="TodoController">
 <nav class="navbar navbar-custom navbar-fixed-top">
 	<div class="row well container-fluid">
 		<div class="container">

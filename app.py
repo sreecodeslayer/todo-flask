@@ -19,7 +19,7 @@ def signup():
 
 @app.route("/logout", methods=['POST'])
 def logout():
-	return True
+	return jsonify({'status':True})
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True, host='0.0.0.0')
