@@ -462,4 +462,13 @@ template {
   display: none;
 }
 
-/* End of normalize css 
+/* End of normalize css */
+/* My styles */
+.bg {
+    background: #455A64;
+    width: 100%;
+}
+
+#icon {
+  cursor: pointer;
+}
