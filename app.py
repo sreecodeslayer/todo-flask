@@ -21,7 +21,11 @@ def load_user(user):
 # ------------------------------------------------------------------------------------
 @app.route("/")
 def index():
-	return render_template('index.html')
+	try:
+		user = User.objects.get(id=current_user.id)
+		return render_template('index.html', username = current_user.username)
+	except (AttributeError, DoesNotExist):
+		return render_template('index.html', username = False)
 
 @app.route("/login", methods=['POST'])
 def login():
