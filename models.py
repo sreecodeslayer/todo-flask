@@ -37,3 +37,10 @@ class User(UserMixin, db.Document):
 		'indexes': ['-created_at', 'username'],
 		'ordering': ['-created_at']
 	}
+
+class Task(db.Document):
+	created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
+	user = db.ReferenceField(User)
+	task_id = db.StringField(max_length=255, required=True)
+	task_title = db.StringField(max_length=50, required=True)
+	task_content = db.StringField(max_length=255, required=True)
