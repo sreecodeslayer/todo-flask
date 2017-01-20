@@ -51,7 +51,7 @@ def signup():
 		return jsonify({'status': False})
 	except DoesNotExist:
 		print 'except'
-		hashed_pass = bcrypt.hashpw(params['password'], bcrypt.gensalt())
+		hashed_pass = bcrypt.hashpw(str(params['password']), bcrypt.gensalt())
 		user_obj = User(username=params['username'])
 		user_obj.set_password(params['password'])
 		user_obj.save()
@@ -61,6 +61,41 @@ def signup():
 def logout():
 	logout_user()
 	return jsonify({'status':True})
+
+# ------------------------------------------------------------------------------------------------
+# 										TASK CRUDs
+# ------------------------------------------------------------------------------------------------
+# CREATE
+@app.route("/new", methods=['POST'])
+@login_required
+def new_task():
+	data = request.get_json()
+	# Add new task for the user
+	return jsonify({'status':True})
+
+# UPDATE
+@app.route("/edit", methods=['POST'])
+@login_required
+def edit_task():
+	data = request.get_json()
+	# Edit the particular task
+	return jsonify({'status':True})
+
+# DELETE
+@app.route("/delete", methods=['POST'])
+@login_required
+def delete_task():
+	data = request.get_json()
+	# Delete the particular task
+	return jsonify({'status':True})
+
+# ALL TASKS
+@app.route("/tasks", methods=['GET'])
+@login_required
+def get_tasks():
+	data = request.get_json()
+	# Return all the tasks created by the <user>
+	return jsonify({'status':True,'tasks':tasks})
 
 if __name__ == '__main__':
 	app.run(debug=True, threaded=True, host='0.0.0.0')

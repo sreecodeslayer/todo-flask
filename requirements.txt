@@ -3,3 +3,4 @@ Flask==0.12
 Werkzeug==0.11.15
 bcrypt
 flask-mongoengine
+flask-login
