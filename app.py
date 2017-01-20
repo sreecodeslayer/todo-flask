@@ -152,7 +152,19 @@ def delete_task():
 def get_tasks():
 	data = request.get_json()
 	# Return all the tasks created by the <user>
-	return jsonify({'status':True,'tasks':tasks})
+	try:
+		all_tasks = Task.objects(user = current_user.id)
+		his_tasks = []
+		for task in all_tasks:
+			his_tasks.append({
+				'task_title':task.task_title,
+				'task_content':task.task_content,
+				'task_id':task.task_id
+				})
+		return jsonify({'status':True,'tasks':his_tasks})
+	except Exception as e:
+		print e
+		return jsonify({'status':False})
 
 if __name__ == '__main__':
 	app.run(debug=True, threaded=True, host='0.0.0.0')
