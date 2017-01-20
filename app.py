@@ -101,7 +101,26 @@ def new_task():
 def edit_task():
 	data = request.get_json()
 	# Edit the particular task
-	return jsonify({'status':True})
+	print data
+	try:
+		task_obj = Task.objects.get(user = current_user.id, task_id = data['task_id'])
+		task_obj.task_content = data['task_content']
+		task_obj.task_title = data['task_title']
+		task_obj.save()
+
+		# Now get all task for this user and return it
+		all_tasks = Task.objects(user = current_user.id)
+		his_tasks = []
+		for task in all_tasks:
+			his_tasks.append({
+				'task_title':task.task_title,
+				'task_content':task.task_content,
+				'task_id':task.task_id
+				})
+		return jsonify({'status':True,'tasks':his_tasks})
+	except DoesNotExist as e:
+		print e
+		return jsonify({'status':False})
 
 # DELETE
 @app.route("/delete", methods=['POST'])
@@ -109,7 +128,23 @@ def edit_task():
 def delete_task():
 	data = request.get_json()
 	# Delete the particular task
-	return jsonify({'status':True})
+	print data
+	try:
+		Task.objects.get(user = current_user.id, task_id = data['task_id']).delete()
+
+		# Now get all task for this user and return it
+		all_tasks = Task.objects(user = current_user.id)
+		his_tasks = []
+		for task in all_tasks:
+			his_tasks.append({
+				'task_title':task.task_title,
+				'task_content':task.task_content,
+				'task_id':task.task_id
+				})
+		return jsonify({'status':True,'tasks':his_tasks})
+	except DoesNotExist as e:
+		print e
+		return jsonify({'status':False})
 
 # ALL TASKS
 @app.route("/tasks", methods=['GET'])
