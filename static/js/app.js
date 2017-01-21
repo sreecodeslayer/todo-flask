@@ -115,20 +115,31 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 		}
 	}
 	$scope.removeTask = function(index,data){
-		$http({
-			url:'/delete',
-			method:'POST',
-			data:{'task_id':data.task_id},
-			headers:{'Content-Type':'application/json'}
-		}).then(function(response) {
-			if(response.data.status == true){
-				$scope.tasks = response.data.tasks;
-				$scope.beforeTasksChanged = angular.copy(response.data.tasks);
-				swal("Yippee!", "You just completed/deleted a task! Way to go champ!", "success")
-			}
-			else{
-				swal("Aww poop!", "We couldn't delete the task! Please try again!", "error")
-			}
+		swal({
+		  title: "Are you sure?",
+		  text: "You will not be able to undo this process!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Yes, delete it!",
+		  closeOnConfirm: false
+		},
+		function(){
+			$http({
+				url:'/delete',
+				method:'POST',
+				data:{'task_id':data.task_id},
+				headers:{'Content-Type':'application/json'}
+				}).then(function(response) {
+				if(response.data.status == true){
+					$scope.tasks = response.data.tasks;
+					$scope.beforeTasksChanged = angular.copy(response.data.tasks);
+					swal("Yippee!", "You just completed/deleted a task! Way to go champ!", "success")
+				}
+				else{
+					swal("Aww poop!", "We couldn't delete the task! Please try again!", "error")
+				}
+			});
 		});
 	}
 }]);

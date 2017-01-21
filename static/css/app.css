@@ -496,6 +496,7 @@ template {
 
 #icon, i {
   cursor: pointer;
+  font-size: large;
 }
 
 .btn {

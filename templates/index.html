@@ -126,7 +126,7 @@
 							<textarea class="form-control" style="border:0px;background-color: transparent;" ng-model="task.task_content" ng-change="contentChanged(task.task_content,task.task_id)">
 							[[ task.task_content ]]
 							</textarea>
-							<div class="btn-group">
+							<div class="btn-group pull-right">
 							<i class="fa fa-floppy-o text-success" ng-click="saveChanges(taskIndex,task)" aria-hidden="true"></i>
 							<i class="fa fa-trash text-warning" ng-click="removeTask(taskIndex,task)" aria-hidden="true"></i>
 							<i class="fa fa-check text-primary" ng-click="markAsCompleted(taskIndex,task)" aria-hidden="true"></i>
