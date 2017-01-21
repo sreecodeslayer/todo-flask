@@ -85,4 +85,31 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 		$("#"+data+"_save").removeClass('text-success');
 		$("#"+data+"_save").hide();
 	}
+	$scope.saveChanges = function(index,data) {
+		if($scope.beforeTasksChanged[index].task_title != data.task_title || $scope.beforeTasksChanged[index].task_content != data.task_content){
+			$http({
+				url:'/edit',
+				method: 'POST',
+				data: {
+				'task_id':data.task_id,
+				'task_title':data.task_title,
+				'task_content':data.task_content
+				},
+				headers: {'Content-Type':'application/json'}
+			}).then(function(response){
+				if(response.data.status == true){
+					console.log("edited");
+					$scope.tasks = response.data.tasks;
+					$scope.beforeTasksChanged = angular.copy(response.data.tasks);
+					// alert success and remove console log
+				}
+				else{
+					// alert failed
+				}
+			})
+		}
+		else{
+			console.log("saveChanges = False");
+		}
+	}
 }]);
