@@ -150,7 +150,6 @@ def delete_task():
 @app.route("/tasks", methods=['GET'])
 @login_required
 def get_tasks():
-	data = request.get_json()
 	# Return all the tasks created by the <user>
 	try:
 		all_tasks = Task.objects(user = current_user.id)
@@ -161,6 +160,7 @@ def get_tasks():
 				'task_content':task.task_content,
 				'task_id':task.task_id
 				})
+		print his_tasks
 		return jsonify({'status':True,'tasks':his_tasks})
 	except Exception as e:
 		print e

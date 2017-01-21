@@ -52,4 +52,37 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 			}
 		});
 	}
+
+	$scope.getTasks = function(){
+		$http({
+			url: '/tasks',
+			method: 'GET',
+			headers: {'Content-Type':'application/josn'}
+		}).then(function(response){
+			$scope.tasks = response.data.tasks;
+			$scope.beforeTasksChanged = angular.copy(response.data.tasks); // makes a copy of the data for comparison
+		});
+	}
+	$scope.enableEdit = function(data){
+		console.log(data + " " + "#"+data+"_title");
+		$("#"+data+"_title").removeAttr("readonly");
+		$("#"+data+"_save").addClass('text-success');
+		$("#"+data+"_save").show();
+	}
+	$scope.saveEdit = function(data){
+		console.log(data + " " + "#"+data+"_title");
+
+		$http({
+			url:'/edit',
+			method: 'POST',
+			data: {
+				'task_id':data
+			}
+		})
+
+
+		$("#"+data+"_title").attr("readonly","readonly");
+		$("#"+data+"_save").removeClass('text-success');
+		$("#"+data+"_save").hide();
+	}
 }]);

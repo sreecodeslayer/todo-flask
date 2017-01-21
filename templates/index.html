@@ -16,6 +16,9 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+	<!-- Fontawesome magic goes here -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </head>
 <body class="bg" ng-controller="TodoController">
 <nav class="navbar navbar-custom navbar-fixed-top">
@@ -101,7 +104,42 @@
 		</div>
 	{% else %}
 	<div id="main-wrapper" class="bg">
-		<p> {{ username }} </p>
+		<div class="card card-1">
+			<h5 class="text-muted">Howdi {{ username }},<br> now you can add and strike off those tasks you want to keep track of from here!</h5>
+			<div class="btn-group">
+				<button data-toggle="modal" data-target="#tasksModal" class="btn btn-info" ng-click="getTasks()">Tasks</button>
+			</div>
+		</div>
+		<div class="modal fade" id="tasksModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div id='task_div_[[ $index+1 ]]' ng-repeat="(taskIndex,task) in tasks">
+						<form>
+						<div class="form-group">
+							<input type="text" class="form-control" style="border:0px;background-color: transparent;" ng-model="task.task_title" ng-change="titleChanged(task.task_title,task.task_id)">
+
+							<textarea class="form-control" style="border:0px;background-color: transparent;" ng-model="task.task_content" ng-change="contentChanged(task.task_content,task.task_id)">
+							[[ task.task_content ]]
+							</textarea>
+
+							<i class="fa fa-floppy-o text-success" ng-click="saveChanges(taskIndex,task)" aria-hidden="true"></i>&nbsp;
+							<div id="alert-success-[[ taskIndex ]]" class="alert alert-success alert-dismissable">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+							    <strong>Success!</strong> The task has been editted.
+							</div>
+							<div id="alert-danger-[[ taskIndex ]]" class="alert alert-danger alert-dismissable">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+							    <strong>Failed!</strong> The task could not be editted.
+							</div>
+							<hr class="featurette-divider" style="border-top-width: 0.05px;">
+						</div>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	{% endif %}
 		<!-- About Modal -->

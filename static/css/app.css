@@ -494,7 +494,7 @@ template {
     width: 100%;
 }
 
-#icon {
+#icon, i {
   cursor: pointer;
 }
 
