@@ -82,7 +82,7 @@ def new_task():
 		task_obj.save()
 
 		# Now get all task for this user and return it
-		all_tasks = Task.objects(user = current_user.id)
+		all_tasks = Task.objects(user = current_user.id).order_by('created_at','-created_at')
 		his_tasks = []
 		for task in all_tasks:
 			his_tasks.append({
@@ -109,7 +109,7 @@ def edit_task():
 		task_obj.save()
 
 		# Now get all task for this user and return it
-		all_tasks = Task.objects(user = current_user.id)
+		all_tasks = Task.objects(user = current_user.id).order_by('created_at','-created_at')
 		his_tasks = []
 		for task in all_tasks:
 			his_tasks.append({
@@ -133,7 +133,7 @@ def delete_task():
 		Task.objects.get(user = current_user.id, task_id = data['task_id']).delete()
 
 		# Now get all task for this user and return it
-		all_tasks = Task.objects(user = current_user.id)
+		all_tasks = Task.objects(user = current_user.id).order_by('created_at','-created_at')
 		his_tasks = []
 		for task in all_tasks:
 			his_tasks.append({
@@ -152,7 +152,7 @@ def delete_task():
 def get_tasks():
 	# Return all the tasks created by the <user>
 	try:
-		all_tasks = Task.objects(user = current_user.id)
+		all_tasks = Task.objects(user = current_user.id).order_by('created_at','-created_at')
 		his_tasks = []
 		for task in all_tasks:
 			his_tasks.append({
