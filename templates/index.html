@@ -126,8 +126,11 @@
 							<textarea class="form-control" style="border:0px;background-color: transparent;" ng-model="task.task_content" ng-change="contentChanged(task.task_content,task.task_id)">
 							[[ task.task_content ]]
 							</textarea>
-
-							<i class="fa fa-floppy-o text-success" ng-click="saveChanges(taskIndex,task)" aria-hidden="true"></i>&nbsp;
+							<div class="btn-group">
+							<i class="fa fa-floppy-o text-success" ng-click="saveChanges(taskIndex,task)" aria-hidden="true"></i>
+							<i class="fa fa-trash text-warning" ng-click="removeTask(taskIndex,task)" aria-hidden="true"></i>
+							<i class="fa fa-check text-primary" ng-click="markAsCompleted(taskIndex,task)" aria-hidden="true"></i>
+							</div>
 							<hr class="featurette-divider" style="border-top-width: 0.05px;">
 						</div>
 						</form>

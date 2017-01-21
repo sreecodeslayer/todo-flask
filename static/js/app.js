@@ -106,12 +106,29 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 				}
 				else{
 					// alert failed
-					swal("Aww poop!", "You just edited a task!", "error")
+					swal("Aww poop!", "We couldn't edit that task! Please try again!", "error")
 				}
 			})
 		}
 		else{
 			console.log("saveChanges = False");
 		}
+	}
+	$scope.removeTask = function(index,data){
+		$http({
+			url:'/delete',
+			method:'POST',
+			data:{'task_id':data.task_id},
+			headers:{'Content-Type':'application/json'}
+		}).then(function(response) {
+			if(response.data.status == true){
+				$scope.tasks = response.data.tasks;
+				$scope.beforeTasksChanged = angular.copy(response.data.tasks);
+				swal("Yippee!", "You just completed/deleted a task! Way to go champ!", "success")
+			}
+			else{
+				swal("Aww poop!", "We couldn't delete the task! Please try again!", "error")
+			}
+		});
 	}
 }]);
