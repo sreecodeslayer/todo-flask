@@ -31,7 +31,7 @@ def index():
 @app.route("/login", methods=['POST'])
 def login():
 	params = request.get_json()
-	print params
+
 	try:
 		user = User.objects.get(username=params['username'])
 		if user.validate_login(user.password, params['password']):
@@ -45,13 +45,13 @@ def login():
 @app.route("/signup", methods=['POST'])
 def signup():
 	params = request.get_json()
-	print params
+
 	try:
-		print 'try'
+
 		data = User.objects.get(username=params['username'])
 		return jsonify({'status': False})
 	except DoesNotExist:
-		print 'except'
+
 		hashed_pass = bcrypt.hashpw(str(params['password']), bcrypt.gensalt())
 		user_obj = User(username=params['username'])
 		user_obj.set_password(params['password'])
@@ -72,7 +72,7 @@ def logout():
 def new_task():
 	data = request.get_json()
 	# Add new task for the user
-	print data
+
 	try:
 		task_obj = Task()
 		task_obj.user = User.objects.get(id=current_user.id)
@@ -92,7 +92,7 @@ def new_task():
 				})
 		return jsonify({'status':True,'tasks':his_tasks})
 	except Exception as e:
-		print e
+
 		return jsonify({'status':False})
 
 # UPDATE
@@ -101,7 +101,7 @@ def new_task():
 def edit_task():
 	data = request.get_json()
 	# Edit the particular task
-	print data
+
 	try:
 		task_obj = Task.objects.get(user = current_user.id, task_id = data['task_id'])
 		task_obj.task_content = data['task_content']
@@ -119,7 +119,7 @@ def edit_task():
 				})
 		return jsonify({'status':True,'tasks':his_tasks})
 	except DoesNotExist as e:
-		print e
+
 		return jsonify({'status':False})
 
 # DELETE
@@ -128,7 +128,7 @@ def edit_task():
 def delete_task():
 	data = request.get_json()
 	# Delete the particular task
-	print data
+
 	try:
 		Task.objects.get(user = current_user.id, task_id = data['task_id']).delete()
 
@@ -143,7 +143,7 @@ def delete_task():
 				})
 		return jsonify({'status':True,'tasks':his_tasks})
 	except DoesNotExist as e:
-		print e
+
 		return jsonify({'status':False})
 
 # ALL TASKS
@@ -160,10 +160,10 @@ def get_tasks():
 				'task_content':task.task_content,
 				'task_id':task.task_id
 				})
-		print his_tasks
+
 		return jsonify({'status':True,'tasks':his_tasks})
 	except Exception as e:
-		print e
+
 		return jsonify({'status':False})
 
 if __name__ == '__main__':
