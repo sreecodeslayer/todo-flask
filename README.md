@@ -8,4 +8,5 @@ A simple todo app to learn Python Web development micro framework and also CRUD 
 ## Resources and libraries used (Mentions, Thanks)
 * [FontCDN](http://fontcdn.org/)
 * [Normalize](https://github.com/necolas/normalize.css)
+* [Sweet Alert](http://t4t5.github.io/sweetalert/)
 

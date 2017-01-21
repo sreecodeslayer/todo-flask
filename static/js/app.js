@@ -102,9 +102,11 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 					$scope.tasks = response.data.tasks;
 					$scope.beforeTasksChanged = angular.copy(response.data.tasks);
 					// alert success and remove console log
+					swal("Awesome job!", "You just edited a task!", "success")
 				}
 				else{
 					// alert failed
+					swal("Aww poop!", "You just edited a task!", "error")
 				}
 			})
 		}
