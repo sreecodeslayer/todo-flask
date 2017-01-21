@@ -13,12 +13,12 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 			}),
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			console.log(response['status'] + ' ' + response['statusText']);
+
 			if(response.data['status'] == true){
 				$window.location.reload();
 			}
 			else{
-				console.log(response.data);
+
 			}
 		});
 	}
@@ -33,7 +33,7 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 			}),
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			console.log(response['status'] + ' ' + response['statusText']);
+
 		});
 	}
 
@@ -43,12 +43,12 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 			method: 'POST',
 			headers: {'Content-Type':'application/json'}
 		}).then(function(response){
-			console.log(response['status'] + ' ' + response['statusText']);
+
 			if(response.data['status'] == true){
 				$window.location.reload();
 			}
 			else{
-				console.log(response.data);
+
 			}
 		});
 	}
@@ -83,7 +83,7 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 		});
 	}
 	$scope.saveEdit = function(data){
-		console.log(data + " " + "#"+data+"_title");
+
 
 		$http({
 			url:'/edit',
@@ -111,10 +111,9 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 				headers: {'Content-Type':'application/json'}
 			}).then(function(response){
 				if(response.data.status == true){
-					console.log("edited");
+
 					$scope.tasks = response.data.tasks;
 					$scope.beforeTasksChanged = angular.copy(response.data.tasks);
-					// alert success and remove console log
 					swal("Awesome job!", "You just edited a task!", "success")
 				}
 				else{
@@ -122,9 +121,6 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 					swal("Aww poop!", "We couldn't edit that task! Please try again!", "error")
 				}
 			})
-		}
-		else{
-			console.log("saveChanges = False");
 		}
 	}
 	$scope.removeTask = function(index,data){
