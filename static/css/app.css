@@ -506,4 +506,11 @@ template {
 .btn:hover {
   box-shadow: 0 5px 5px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
-
+.modal-body {
+    max-height: calc(100vh - 212px);
+    overflow-y: auto;
+}
+.modal-header {
+  background: black;
+  color: white;
+}

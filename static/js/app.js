@@ -52,7 +52,26 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 			}
 		});
 	}
-
+	$scope.saveTask = function(data){
+		$http({
+			url: '/new',
+			method: 'POST',
+			data:{
+				'task_title':data.title,
+				'task_content':data.content
+			},
+			headers:{'Content-Type':'application/json'}
+		}).then(function(response) {
+			if(response.data.status == true){
+				$scope.tasks = response.data.tasks;
+				$scope.beforeTasksChanged = angular.copy(response.data.tasks);
+				swal('Way to go!','You have added a new tast!!','success')
+			}
+			else{
+				swal('Aww poop!',"We couldn't add it for you! Please try again!", 'error')
+			}
+		})
+	}
 	$scope.getTasks = function(){
 		$http({
 			url: '/tasks',
@@ -62,12 +81,6 @@ tApp.controller('TodoController', ['$scope', '$http', '$window', '$route', funct
 			$scope.tasks = response.data.tasks;
 			$scope.beforeTasksChanged = angular.copy(response.data.tasks); // makes a copy of the data for comparison
 		});
-	}
-	$scope.enableEdit = function(data){
-		console.log(data + " " + "#"+data+"_title");
-		$("#"+data+"_title").removeAttr("readonly");
-		$("#"+data+"_save").addClass('text-success');
-		$("#"+data+"_save").show();
 	}
 	$scope.saveEdit = function(data){
 		console.log(data + " " + "#"+data+"_title");
