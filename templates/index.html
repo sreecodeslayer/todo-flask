@@ -43,11 +43,14 @@
 					<li class="nav-item" data-toggle="modal" data-target="#aboutModal">
 						<a class="nav-link" href="#">About</a>
 
+						<li class="nav-item" data-toggle="modal" data-target="#loginModal">
+							<a class="nav-link" href="#">Sign In</a>
+
 						<li class="nav-item" data-toggle="modal" data-target="#signupModal">
 							<a class="nav-link" href="#">Sign Up</a>
 
 							<li class="nav-item" data-toggle="modal" data-target="#contactModal">
-								<a class="nav-link" href="#">Contact</a>
+								<a href="#">Contact</a>
 
 
 
@@ -111,9 +114,58 @@
 			</div>
 		</div>
 
+		<!-- Login Modal -->
+		<div class="modal fade" id="loginModal" role="dialog">
+			<div class="modal-dialog" >
+				<div class="modal-content">
+					<div class="modal-body">
+					<h5 class="lead text-center text-muted">Login</h5>
+					<form ng-submit="login()">
+						<div class="form-group">
+							<label class="text-success">Username: </label>&nbsp;<input class="form-control" ng-model="login.username" type="text" name="username">
+						</div>
+
+						<div class="form-group">
+							<label class="text-success">Password: </label>&nbsp;<input class="form-control" ng-model="login.password" type="password" name="password">
+						</div>
+
+						<div class="form-group">
+							<input class="btn btn-success" type="submit" name="login" value="Login">
+						</div>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 
 
 	</div>
+
+
+
+	<nav class="navbar navbar-custom navbar-fixed-bottom">
+		<div class="row well container-fluid">
+
+
+
+						<center>Made using Python Flask with <font color=red>❤</font></center>
+
+								</div>
+
+
+
+
+
+	<!--Links-->
+
+
+		<!-- Main Content Goes Here -->
+	</nav>
+
+
+
+
 </body>
 </html>

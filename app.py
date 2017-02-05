@@ -4,7 +4,10 @@ from flask_mongoengine import MongoEngine, DoesNotExist
 from settings import db,app
 from models import User, Task
 import bcrypt
-from uuid import uuid4
+from flask.ext.wtf import Form
+from wtforms.fields import TextField, BooleanField
+from wtforms.validators import Required
+from forms import ContactForm
 
 # now get all the models from models.py ( this can be inside app.py)
 # am just making it in models.py for readbility
@@ -20,6 +23,7 @@ def load_user(user):
 # ------------------------------------------------------------------------------------
 # 										Flask Login ends
 # ------------------------------------------------------------------------------------
+
 @app.route("/")
 def index():
 	try:
@@ -27,6 +31,10 @@ def index():
 		return render_template('index.html', username = current_user.username)
 	except (AttributeError, DoesNotExist):
 		return render_template('index.html', username = False)
+
+@app.route('/contacts/')
+def contacts():
+    return render_template('contacts.html')
 
 @app.route("/login", methods=['POST'])
 def login():
