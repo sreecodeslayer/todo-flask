@@ -468,15 +468,16 @@ template {
 /* Material Card */
 /* https://codepen.io/sdthornton/pen/wBZdXq */
 .card {
-  background: #fff;
+  background: #ffff0;
   border-radius: 2px;
   display: block;
   /*height: 300px;*/
   overflow:auto;
-  margin: 15% auto;
+  margin: 0% auto;
   padding: 2.5rem;
-  position: relative;
-  width: 25%;
+  position: center;
+  height: auto;
+  width: auto;;
 }
 
 .card-1 {
@@ -489,7 +490,7 @@ template {
 
 
 /* My styles */
-.bg {
+.bgg {
     background: #455A64 !important;
     width: 100%;
 }
