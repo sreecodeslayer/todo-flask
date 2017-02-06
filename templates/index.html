@@ -31,36 +31,89 @@
 <nav class="navbar navbar-custom navbar-fixed-top">
 	<div class="row well container-fluid">
 		<div class="container">
-		<div class="navbar-header text-center">
+		<div class="navbar-header text-left">
 			<img id="icon" href="/" src = "{{ url_for('static' , filename='images/icon.png') }}" alt="" />
-		</div>
-		<!--Links-->
-			<ul class="nav navbar-nav navbar-right">
-				<li class="nav-item" data-toggle="modal" data-target="#aboutModal">
-					<a class="nav-link" href="#">About</a>
+
+	</div>
+
+<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item" data-toggle="modal" data-target="#homeModal">
+					<a class="nav-link" href="#">Home</a>
+
+					<li class="nav-item" data-toggle="modal" data-target="#aboutModal">
+						<a class="nav-link" href="#">About</a>
+
+						<li class="nav-item" data-toggle="modal" data-target="#loginModal">
+							<a class="nav-link" href="#">Sign In</a>
+
+						<li class="nav-item" data-toggle="modal" data-target="#signupModal">
+							<a class="nav-link" href="#">Sign Up</a>
+
+							<li class="nav-item" data-toggle="modal" data-target="#contactModal">
+								<a href="#">Contact</a>
+
+
+
+
+
+<!--Links-->
+
 				</li>
-				{% if username %}
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ username | capitalize }}<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-				<li style="cursor: pointer;"><a ng-click="logout()">Logout</a></li>
-				</ul>
-				</li>
-				{% endif %}
 			</ul>
 		</div>
 	</div>
 	<!-- Main Content Goes Here -->
 </nav>
-	{% if not username %}
+
 	<div id="main-wrapper" class="bg">
-		<div class="card card-1">
-			<h5 class="text-muted">Howdi user,<br>Login/Signup and start ticking off those tasks!</h5>
+		<div class="card card-2">
+			<h3 class="text-muted"><center>Hello,<br>
 			<div class="pull-right">
-				<button data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Login</button>&nbsp;
-				<button data-toggle="modal" data-target="#signupModal" class="btn btn-success">Signup</button>
 			</div>
-		<!-- </div> -->
+	</div>
+
+	<div class="card card-3">
+		<h3 class="text-muted"><center>Hello,<br>Welcome to Flask!
+		<div class="pull-right">
+		</div>
+</div>
+
+		<!-- About Modal -->
+		<div class="modal fade" id="aboutModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<h5 class="lead text-center text-muted">About</h5>
+						<p class="text-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor mauris a dignissim molestie. Aenean id ante commodo, consequat metus id, mattis nisl. Nulla quis tortor imperdiet, molestie nisl vel. </p>
+						<p class="text-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan odio vel dolor lacinia, sit amet mollis dui sodales. Duis gravida magna eget tristique efficitur. Aenean dignissim nisl vel enim interdum viverra. Duis metus lorem, facilisis quis ornare a, porttitor.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="signupModal" role="dialog">
+			<div class="modal-dialog" >
+				<div class="modal-content">
+					<div class="modal-body">
+						<form ng-submit="signup()">
+						<div class="form-group">
+							<label class="text-success">Username: </label>&nbsp;<input class="form-control" ng-model="signup.username"type="text" name="username" placeholder="Case insensitive">
+						</div>
+
+						<div class="form-group">
+							<label class="text-success">Password: </label>&nbsp;<input class="form-control" ng-model="signup.password"type="password" name="password">
+						</div>
+
+						<div class="form-group">
+							<input class="btn btn-success" type="submit" name="signup" value="Signup">
+						</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- Login Modal -->
 		<div class="modal fade" id="loginModal" role="dialog">
 			<div class="modal-dialog" >
@@ -79,97 +132,40 @@
 						<div class="form-group">
 							<input class="btn btn-success" type="submit" name="login" value="Login">
 						</div>
-					</form>			
+					</form>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Signup Modal -->
-		<div class="modal fade" id="signupModal" role="dialog">
-			<div class="modal-dialog" >
-				<div class="modal-content">
-					<div class="modal-body">
-						<form ng-submit="signup()">
-						<div class="form-group">
-							<label class="text-success">Username: </label>&nbsp;<input class="form-control" ng-model="signup.username"type="text" name="username" placeholder="Case insensitive">
-						</div>
 
-						<div class="form-group">
-							<label class="text-success">Password: </label>&nbsp;<input class="form-control" ng-model="signup.password"type="password" name="password">
-						</div>
 
-						<div class="form-group">
-							<input class="btn btn-success" type="submit" name="signup" value="Signup">
-						</div>
-							
-						</form>			
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	{% else %}
-	<div id="main-wrapper" class="bg">
-		<div class="card card-1">
-			<h5 class="text-muted">Howdi {{ username }},<br> now you can add and strike off those tasks you want to keep track of from here!</h5>
-			<div class="btn-group">
-				<button data-toggle="modal" data-target="#tasksModal" class="btn btn-info" ng-click="getTasks()">Tasks</button>
-			</div>
-		</div>
-		<div class="modal fade" id="tasksModal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title text-center">Your Tasks</h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<i class="fa fa-plus-circle" data-toggle="collapse" data-target="#newTaskForm" style="font-size: xx-large;" aria-hidden="true"></i>
-						</div>
-						<form id="newTaskForm" class="collapse">	
-						<div class="form-group">
-							<input type="text" class="form-control" style="border:0px;background-color: transparent;" ng-model="newTask.title" placeholder="Enter task title">
-							<textarea class="form-control" style="border:0px;background-color: transparent;" ng-model="newTask.content" placeholder="Enter task details/content/sub-tasks"></textarea>
-							<i class="fa fa-floppy-o text-success pull-right" ng-click="saveTask(newTask)" aria-hidden="true"></i>
-						</div>
-						</form>
-						<div id='task_div_[[ $index+1 ]]' ng-repeat="(taskIndex,task) in tasks">
-						<form>
-						<div class="form-group">
-							<input type="text" class="form-control" style="border:0px;background-color: transparent;" ng-model="task.task_title" ng-change="titleChanged(task.task_title,task.task_id)">
 
-							<textarea class="form-control" style="border:0px;background-color: transparent;" ng-model="task.task_content" ng-change="contentChanged(task.task_content,task.task_id)">
-							[[ task.task_content ]]
-							</textarea>
-							<div class="btn-group pull-right">
-							<i class="fa fa-floppy-o text-success" ng-click="saveChanges(taskIndex,task)" aria-hidden="true"></i>
-							<i class="fa fa-trash text-warning" ng-click="removeTask(taskIndex,task)" aria-hidden="true"></i>
-							<i class="fa fa-check text-primary" ng-click="markAsCompleted(taskIndex,task)" aria-hidden="true"></i>
-							</div>
-							<hr class="featurette-divider" style="border-top-width: 0.05px;">
-						</div>
-						</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
-	{% endif %}
-		<!-- About Modal -->
-		<div class="modal fade" id="aboutModal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<h5 class="lead text-center text-muted">About</h5>
-						<p class="text-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor mauris a dignissim molestie. Aenean id ante commodo, consequat metus id, mattis nisl. Nulla quis tortor imperdiet, molestie nisl vel. </p>
-						<p class="text-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce accumsan odio vel dolor lacinia, sit amet mollis dui sodales. Duis gravida magna eget tristique efficitur. Aenean dignissim nisl vel enim interdum viverra. Duis metus lorem, facilisis quis ornare a, porttitor.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+
+	<nav class="navbar navbar-custom navbar-fixed-bottom">
+		<div class="row well container-fluid">
+
+
+
+						<center>Made using Python Flask with <font color=red>❤</font></center>
+
+								</div>
+
+
+
+
+
+	<!--Links-->
+
+
+		<!-- Main Content Goes Here -->
+	</nav>
+
+
+
+
 </body>
 </html>
